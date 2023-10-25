@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hii look at the website, not me</title>
+    <style>
+
+        
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: rgb(255, 255, 255);
+        }
+
+        .centered-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .button {
+            display: inline-block;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 50px;
+            height: 30px;
+            position: relative;
+        }
+
+        .button img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .text {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            color: white;
+            font-family: fantasy;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .button:hover .text {
+            opacity: 1;
+        }
+
+        #my-image {
+            margin-top: 150px;
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <img src="sosa.jpg" alt="Sosa" id="my-image">
+    <div class="centered-text">
+        <h1 id="typing-text"></h1>
+        <div class="static-text">
+            <p>I code for fun and play video games!</p>
+            <p>Check out my socials below!</p>
+        </div>
+        <!-- Button 1 -->
+        <button class="button" onclick="copyToClipboard('omenlol')">
+            <img src="disc.png" alt="Button 1">
+            <span class="text">click to copy</span>
+        </button>
+
+        <!-- Button 2 -->
+        <a href="https://www.instagram.com/lookoutyourwindowrn/" target="_blank" class="button">
+            <img src="insta.png" alt="Button 2">
+        </a>
+
+        <!-- Button 3 -->
+        <a href="https://twitter.com/omennnlol" target="_blank" class="button">
+            <img src="twitter.png" alt="Button 3">
+        </a>
+    </div>
+    <script>
+        const textToType = "Hello, I'm Omen!";
+        const typingSpeed = 125;
+        const eraseSpeed = 50;
+        let isTyping = true;
+
+        function typeText() {
+            const textElement = document.getElementById("typing-text");
+            textElement.innerHTML = "";
+
+            let i = 0;
+
+            function type() {
+                if (i <= textToType.length) {
+                    textElement.innerHTML = textToType.substring(0, i);
+                    i++;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    isTyping = false;
+                    setTimeout(eraseText, 1000); // Wait for 1 second before erasing
+                }
+            }
+
+            function eraseText() {
+                if (i >= 0) {
+                    textElement.innerHTML = textToType.substring(0, i);
+                    i--;
+                    setTimeout(eraseText, eraseSpeed);
+                } else {
+                    isTyping = true;
+                    setTimeout(type, 1000); // Wait for 1 second before typing again
+                }
+            }
+
+            if (isTyping) {
+                type();
+            } else {
+                eraseText();
+            }
+        }
+
+        function copyToClipboard(text) {
+            const textField = document.createElement('textarea');
+            textField.value = text;
+            document.body.appendChild(textField);
+            textField.select();
+            document.execCommand('copy');
+            document.body.removeChild(textField);
+        }
+
+        window.onload = typeText;
+    </script>
+</body>
+</html>
